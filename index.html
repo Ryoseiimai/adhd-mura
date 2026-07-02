@@ -95,7 +95,7 @@
   }
 
   section {
-    padding: clamp(3rem, 8vw, 5.5rem) 0;
+    padding: clamp(4.5rem, 10vw, 8rem) 0;
   }
 
   /* ---------- Hero ---------- */
@@ -145,6 +145,12 @@
     transform: translateY(-2px);
   }
 
+  .btn-caption {
+    margin-top: 0.7rem;
+    font-size: 0.85rem;
+    color: var(--brown);
+  }
+
   /* ---------- Map ---------- */
 
   .map-section {
@@ -161,6 +167,24 @@
     border-radius: 22px 8px 22px 8px;
     padding: clamp(1rem, 4vw, 2.2rem);
     box-shadow: 5px 6px 0 rgba(138, 109, 75, 0.14);
+  }
+
+  .map-mobile {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .map-desktop {
+      display: none;
+    }
+
+    .map-mobile {
+      display: block;
+    }
+
+    .map-frame {
+      padding: 0.6rem;
+    }
   }
 
   .trail {
@@ -237,8 +261,9 @@
   }
 
   .promise-card h3 {
-    font-size: 1.2rem;
+    font-size: clamp(1.05rem, 2.6vw, 1.2rem);
     margin-bottom: 0.7rem;
+    text-wrap: balance;
   }
 
   .promise-card p {
@@ -272,7 +297,9 @@
   .chief-body {
     max-width: 640px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
+    padding-left: 1.4rem;
+    border-left: 3px solid var(--brown);
   }
 
   .chief-body p {
@@ -340,27 +367,38 @@
     <h1>ADHD村</h1>
     <p class="lead">ADHDの人が、AIで上手く暮らせるようになる村。</p>
     <p class="note">診断がなくても、っぽいなと思うだけでも、村民になれます。</p>
-    <a class="btn" href="#join">入村する（LINEオープンチャット・近日公開）</a>
+    <a class="btn" href="#join">入村する</a>
+    <p class="btn-caption">LINEオープンチャット・近日公開</p>
   </section>
 
   <section class="map-section wrap" aria-labelledby="map-heading">
     <h2 id="map-heading">村の地図</h2>
     <div class="map-frame">
-      <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+      <svg class="map-desktop" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
         <title>村の地図</title>
         <desc>広場、掲示板、社を結ぶ一本の小道が描かれた地図</desc>
         <defs>
-          <filter id="rough" x="-30%" y="-30%" width="160%" height="160%">
+          <filter id="rough-desktop" x="-30%" y="-30%" width="160%" height="160%">
             <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="noise"></feTurbulence>
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="7"></feDisplacementMap>
           </filter>
         </defs>
 
+        <!-- 木立 (trees, decorative) -->
+        <g filter="url(#rough-desktop)">
+          <circle cx="72" cy="86" r="20" fill="none" stroke="#2F5D3A" stroke-width="3"></circle>
+          <circle cx="98" cy="96" r="16" fill="none" stroke="#2F5D3A" stroke-width="3"></circle>
+          <circle cx="54" cy="102" r="15" fill="none" stroke="#2F5D3A" stroke-width="3"></circle>
+          <line x1="72" y1="104" x2="70" y2="128" stroke="#8A6D4B" stroke-width="3" stroke-linecap="round"></line>
+          <line x1="98" y1="110" x2="97" y2="130" stroke="#8A6D4B" stroke-width="3" stroke-linecap="round"></line>
+          <line x1="54" y1="115" x2="53" y2="134" stroke="#8A6D4B" stroke-width="3" stroke-linecap="round"></line>
+        </g>
+
         <!-- trail connecting the three spots -->
-        <path class="trail" filter="url(#rough)" d="M 190 262 C 250 224, 320 262, 380 300 C 440 338, 480 358, 520 378 C 566 348, 560 276, 582 220 C 598 158, 606 128, 620 96" fill="none" stroke="#8A6D4B" stroke-width="4" stroke-linecap="round"></path>
+        <path class="trail" filter="url(#rough-desktop)" d="M 190 262 C 250 224, 320 262, 380 300 C 440 338, 480 358, 520 378 C 566 348, 560 276, 582 220 C 598 158, 606 128, 620 96" fill="none" stroke="#8A6D4B" stroke-width="4" stroke-linecap="round"></path>
 
         <!-- 広場 (plaza) -->
-        <g filter="url(#rough)">
+        <g filter="url(#rough-desktop)">
           <circle cx="190" cy="262" r="34" fill="none" stroke="#2F5D3A" stroke-width="4"></circle>
           <circle cx="190" cy="262" r="4" fill="#2F5D3A"></circle>
           <line x1="164" y1="240" x2="172" y2="252" stroke="#2F5D3A" stroke-width="3" stroke-linecap="round"></line>
@@ -370,7 +408,7 @@
         <text x="190" y="344" text-anchor="middle" class="map-sublabel" font-size="14" fill="#8A6D4B">オープンチャット</text>
 
         <!-- 掲示板 (board) -->
-        <g filter="url(#rough)">
+        <g filter="url(#rough-desktop)">
           <rect x="484" y="330" width="72" height="48" rx="3" fill="none" stroke="#2F5D3A" stroke-width="4"></rect>
           <line x1="500" y1="378" x2="496" y2="404" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
           <line x1="540" y1="378" x2="544" y2="404" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
@@ -381,7 +419,7 @@
         <text x="520" y="452" text-anchor="middle" class="map-sublabel" font-size="14" fill="#8A6D4B">Xの毎日実験</text>
 
         <!-- 社 (shrine) -->
-        <g filter="url(#rough)">
+        <g filter="url(#rough-desktop)">
           <line x1="596" y1="60" x2="596" y2="112" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
           <line x1="644" y1="60" x2="644" y2="112" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
           <line x1="588" y1="70" x2="652" y2="70" stroke="#C93A2B" stroke-width="5" stroke-linecap="round"></line>
@@ -389,6 +427,61 @@
         </g>
         <text x="620" y="150" text-anchor="middle" class="map-label" font-size="22" fill="#24281F">社</text>
         <text x="620" y="174" text-anchor="middle" class="map-sublabel" font-size="14" fill="#8A6D4B">神様軍団</text>
+      </svg>
+
+      <svg class="map-mobile" viewBox="0 0 380 640" xmlns="http://www.w3.org/2000/svg">
+        <title>村の地図</title>
+        <desc>広場、掲示板、社を結ぶ一本の小道が描かれた地図</desc>
+        <defs>
+          <filter id="rough-mobile" x="-30%" y="-30%" width="160%" height="160%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="noise"></feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="7"></feDisplacementMap>
+          </filter>
+        </defs>
+
+        <!-- 木立 (trees, decorative) -->
+        <g filter="url(#rough-mobile)">
+          <circle cx="58" cy="76" r="16" fill="none" stroke="#2F5D3A" stroke-width="3"></circle>
+          <circle cx="80" cy="84" r="13" fill="none" stroke="#2F5D3A" stroke-width="3"></circle>
+          <circle cx="44" cy="90" r="12" fill="none" stroke="#2F5D3A" stroke-width="3"></circle>
+          <line x1="58" y1="92" x2="57" y2="110" stroke="#8A6D4B" stroke-width="3" stroke-linecap="round"></line>
+          <line x1="80" y1="97" x2="79" y2="112" stroke="#8A6D4B" stroke-width="3" stroke-linecap="round"></line>
+          <line x1="44" y1="102" x2="43" y2="116" stroke="#8A6D4B" stroke-width="3" stroke-linecap="round"></line>
+        </g>
+
+        <!-- trail connecting the three spots -->
+        <path class="trail" filter="url(#rough-mobile)" d="M 110 300 C 160 336, 200 380, 226 424 C 252 452, 268 440, 278 396 C 288 344, 294 220, 300 160 C 302 130, 302 112, 302 102" fill="none" stroke="#8A6D4B" stroke-width="4" stroke-linecap="round"></path>
+
+        <!-- 広場 (plaza) -->
+        <g filter="url(#rough-mobile)">
+          <circle cx="110" cy="300" r="34" fill="none" stroke="#2F5D3A" stroke-width="4"></circle>
+          <circle cx="110" cy="300" r="4" fill="#2F5D3A"></circle>
+          <line x1="84" y1="278" x2="92" y2="290" stroke="#2F5D3A" stroke-width="3" stroke-linecap="round"></line>
+          <line x1="136" y1="278" x2="128" y2="290" stroke="#2F5D3A" stroke-width="3" stroke-linecap="round"></line>
+        </g>
+        <text x="110" y="358" text-anchor="middle" class="map-label" font-size="26" fill="#24281F">広場</text>
+        <text x="110" y="384" text-anchor="middle" class="map-sublabel" font-size="18" fill="#8A6D4B">オープンチャット</text>
+
+        <!-- 掲示板 (board) -->
+        <g filter="url(#rough-mobile)">
+          <rect x="194" y="430" width="72" height="48" rx="3" fill="none" stroke="#2F5D3A" stroke-width="4"></rect>
+          <line x1="210" y1="478" x2="206" y2="504" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="250" y1="478" x2="254" y2="504" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="208" y1="446" x2="240" y2="443" stroke="#8A6D4B" stroke-width="3" stroke-linecap="round"></line>
+          <line x1="208" y1="460" x2="232" y2="458" stroke="#8A6D4B" stroke-width="3" stroke-linecap="round"></line>
+        </g>
+        <text x="230" y="528" text-anchor="middle" class="map-label" font-size="26" fill="#24281F">掲示板</text>
+        <text x="230" y="554" text-anchor="middle" class="map-sublabel" font-size="18" fill="#8A6D4B">Xの毎日実験</text>
+
+        <!-- 社 (shrine) -->
+        <g filter="url(#rough-mobile)">
+          <line x1="278" y1="50" x2="278" y2="102" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="326" y1="50" x2="326" y2="102" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
+          <line x1="270" y1="60" x2="334" y2="60" stroke="#C93A2B" stroke-width="5" stroke-linecap="round"></line>
+          <line x1="274" y1="74" x2="330" y2="74" stroke="#2F5D3A" stroke-width="4" stroke-linecap="round"></line>
+        </g>
+        <text x="302" y="150" text-anchor="middle" class="map-label" font-size="26" fill="#24281F">社</text>
+        <text x="302" y="176" text-anchor="middle" class="map-sublabel" font-size="18" fill="#8A6D4B">神様軍団</text>
       </svg>
     </div>
   </section>
